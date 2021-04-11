@@ -1,13 +1,34 @@
-pokemonList=[
-  {name: "charmander", type: "fire", height: "0.6"},
-  {name: "bulbasaur", type:["grass","poison"], height:"0.7"},
-  {name:"squirtle", type:"water",height:"0.5"}
-]
+var pokemonRepository = (function () {
+  var pokemonList = [
+    {
+      name: "charmander",
+      type: "fire",
+      height: "0.6"
+    },
+    {
+      name: "bulbasaur",
+      type:["grass","poison"],
+      height:"0.7"
+    },
+    {
+      name:"squirtle",
+      type:"water",
+      height:"0.5"
+    }
+  ];
 
-let pokemonSizeThreshold = 0.7;
+  function getAll() {
+    return pokemonList;
+  }
+  function add(pokemon) {
+    pokemonList.push(pokemon);
+  }
 
-for(let i = 0; i <= pokemonList.length; i++){
-  let pokemonString = `${pokemonList[i].name} ( height: ${ pokemonList[i].height} )`;
-  let pokemon = pokemonList[i].height >= pokemonSizeThreshold ? `<P> ${pokemonString} - Wow, that's big! </p>` : `<p> ${pokemonString} </p>`;
-  document.write(pokemon);
-}
+  return {
+    getAll: getAll,
+    add: add
+  };
+})();
+
+
+console.log( pokemonRepository.getAll() );
