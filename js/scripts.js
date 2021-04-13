@@ -1,5 +1,5 @@
-var pokemonRepository = (function () {
-  var pokemonList = [
+let pokemonRepository = (function () {
+  let repository = [
     {
       name: "charmander",
       type: "fire",
@@ -15,20 +15,41 @@ var pokemonRepository = (function () {
       type:"water",
       height:"0.5"
     }
-  ];
+];
 
-  function getAll() {
-    return pokemonList;
+function add(pokemon) {
+  if (
+    typeof pokemon === "object" &&
+    "name" in pokemon &&
+    "height" in pokemon &&
+    "types" in pokemon
+  ) {
+  repository.push(pokemon);
+  } else {
+    console.log("pokemon is not correct");
   }
-  function add(pokemon) {
-    pokemonList.push(pokemon);
+}
+function getAll() {
+    return repository;
   }
-
+  function addListItem(pokemon){
+    let pokemonList = document.querySelector(".pokemon-list");
+    let listpokemon = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("button-class");
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
+  }
   return {
+    add: add,
     getAll: getAll,
-    add: add
+    addListItem: addListItem
   };
 })();
 
+console.log(pokemonRepository.getAll());
 
-console.log( pokemonRepository.getAll() );
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);
+});
