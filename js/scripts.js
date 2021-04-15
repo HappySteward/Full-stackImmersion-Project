@@ -40,6 +40,11 @@ function getAll() {
     button.classList.add("button-class");
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
+    ("button").addEventListener('click', showDetails(pokemon) {
+      console.log(pokemon)});
+  }
+  function showDetails(pokemon){
+    console.log()
   }
   return {
     add: add,
