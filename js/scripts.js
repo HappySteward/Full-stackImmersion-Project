@@ -15,6 +15,7 @@ let pokemonRepository = (function () {
   function getAll() {
     return pokemonList;
   }
+
   function addListItem(pokemon) {
     let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
@@ -64,6 +65,26 @@ let pokemonRepository = (function () {
       console.log(item);
     });
   }
+
+  function showModal() {
+  let modalContainer = documanet.querySelector
+  ('#modal-container');
+  modalContainer.innerHTML = '';
+  let modal = document.createElement('div');
+
+  let closeButtonelement = document.createElement
+  ('button');
+  closeButtonElement.classList.add('modal-close');
+  closeButtonelment.innerText = 'close';
+
+
+  modalcontainer.classList.add('is-visable');
+  }
+
+  document.querySelector('#show-modal').addEventListener
+  ('click',() => {
+    showModal();
+  });
 
   return {
     add: add,
