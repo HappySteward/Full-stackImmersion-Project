@@ -37,9 +37,9 @@ let pokemonRepository = (function () {
         let pokemon = {
           name: item.name,
           detailsUrl: item.url
+          imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`,
         };
         add(pokemon);
-        console.log(pokemon);
       });
     }).catch(function (e) {
       console.error(e);
@@ -50,7 +50,8 @@ let pokemonRepository = (function () {
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
-    }).then(function (details) {
+    })
+    .then(function (details) {
       // Now we add the details to the item
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
@@ -60,9 +61,9 @@ let pokemonRepository = (function () {
     });
   }
 
-  function showDetails(item) {
-    pokemonRepository.loadDetails(item).then(function () {
-      showModal(item);
+  function showDetails(pokemon) {
+    pokemonRepository.loadDetails(pokemon).then(function () {
+      showModal(pokemon);
     });
   }
 
@@ -77,7 +78,7 @@ let pokemonRepository = (function () {
   modal.classList.add('modal'); /// add class for style
 
   //add name to modal
-  let pokemonNameElement = document.create Element('div');
+  let pokemonNameElement = document.createElement('div');
   pokemonNameElement.innerHTML = pokemon.pokemonName
   modalBody.appendChild(pokemonNameElement)
 
@@ -117,7 +118,7 @@ document.querySelector('#show-modal').addEventListener('click'.() => {
 })();
 
 
-pokemonRepository.loadList().then(function () {
+pokemonRepository.loadList().then(function (pokemon) {
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
