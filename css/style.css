@@ -21,6 +21,11 @@ body {
   font-family: Arial, sans-serif;
 }
 
+#modal-container.is-visible {
+  /* CSS for modal container - add your own desired CSS styles here */
+  display: block!important;
+}
+
 #modal-container {
   position: fixed;
   padding: 20px;
@@ -38,7 +43,7 @@ body {
   overflow: auto;
 
   /* this is used to center the modal */
-  display: grid;
+  display: none;
   text-align: center;
 }
 
@@ -68,13 +73,4 @@ body {
 
 .modal p {
   margin-bottom: 0;
-}
-
-#modal-container {
-  display: none;
-}
-
-#modal-container.is-visible {
-  /* CSS for modal container - add your own desired CSS styles here */
-  display: block;
 }

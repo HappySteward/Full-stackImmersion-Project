@@ -62,29 +62,49 @@ let pokemonRepository = (function () {
 
   function showDetails(item) {
     pokemonRepository.loadDetails(item).then(function () {
-      console.log(item);
+      showModal(item);
     });
   }
 
-  function showModal() {
-  let modalContainer = documanet.querySelector
-  ('#modal-container');
+  function showModal(pokemon) {
+  //modal container
+  let modalContainer = document.querySelector('#modal-container');
   modalContainer.innerHTML = '';
+
+  // modal
   let modal = document.createElement('div');
+  let modalBody = document.createElement('div'); //create body of modal
+  modal.classList.add('modal'); /// add class for style
 
-  let closeButtonelement = document.createElement
-  ('button');
+  //add name to modal
+  let pokemonNameElement = document.create Element('div');
+  pokemonNameElement.innerHTML = pokemon.pokemonName
+  modalBody.appendChild(pokemonNameElement)
+
+  //add close button to modal
+  let closeButtonElement = document.createElement('div');
   closeButtonElement.classList.add('modal-close');
-  closeButtonelment.innerText = 'close';
+  closeButtonElement.innerText = 'close';
 
+  //remove class when close button is clicked
+  closeButtonElement.addEventListener('click', () => {
+    modalContainer.classList.remove('is-visable');
+  })
+  modal.appendChild(closeButtonElement)
 
-  modalcontainer.classList.add('is-visable');
-  }
+  // add body to modal
+  modal.appendChild(closeButtonElement)
 
-  document.querySelector('#show-modal').addEventListener
-  ('click',() => {
-    showModal();
-  });
+  // add modal to container
+  modalContainer.appendchild(modal)
+
+  // add class to make modal visible
+  modalContainer.classList.add('is-visible');
+}
+
+document.querySelector('#show-modal').addEventListener('click'.() => {
+  showModal();
+});
 
   return {
     add: add,
