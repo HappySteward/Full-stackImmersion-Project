@@ -12,6 +12,7 @@ let pokemonRepository = (function () {
       console.log("pokemon is not correct");
     }
   }
+
   function getAll() {
     return pokemonList;
   }
@@ -20,7 +21,7 @@ let pokemonRepository = (function () {
     let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
     let button = document.createElement("button");
-    button.innerText = pokemon.name;
+    button.innerHTML = `<img width="44px" class="sprite" style="float:left;" src="${pokemon.imageUrl}"> <p>${pokemon.name}</p>`;
     button.classList.add("button-class");
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
@@ -33,10 +34,10 @@ let pokemonRepository = (function () {
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
-      json.results.forEach(function (item) {
+      json.results.forEach(function (item, index) {
         let pokemon = {
           name: item.name,
-          detailsUrl: item.url
+          detailsUrl: item.url,
           imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`,
         };
         add(pokemon);
@@ -77,35 +78,47 @@ let pokemonRepository = (function () {
   let modalBody = document.createElement('div'); //create body of modal
   modal.classList.add('modal'); /// add class for style
 
-  //add name to modal
+  //add name to body
   let pokemonNameElement = document.createElement('div');
-  pokemonNameElement.innerHTML = pokemon.pokemonName
+  pokemonNameElement.innerHTML = pokemon.name
   modalBody.appendChild(pokemonNameElement)
 
   //add close button to modal
-  let closeButtonElement = document.createElement('div');
+  let closeButtonElement = document.createElement('button');
   closeButtonElement.classList.add('modal-close');
   closeButtonElement.innerText = 'close';
-
   //remove class when close button is clicked
   closeButtonElement.addEventListener('click', () => {
-    modalContainer.classList.remove('is-visable');
+  modalContainer.classList.remove('is-visable');
   })
+
   modal.appendChild(closeButtonElement)
 
   // add body to modal
-  modal.appendChild(closeButtonElement)
+  modal.appendChild(modalBody)
 
   // add modal to container
-  modalContainer.appendchild(modal)
+  modalContainer.appendChild(modal)
 
   // add class to make modal visible
   modalContainer.classList.add('is-visible');
+
 }
 
-document.querySelector('#show-modal').addEventListener('click'.() => {
+document.querySelector('#show-modal').addEventListener('click',() => {
   showModal();
 });
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();
+
+  
+  modalContainer.addEventListener('click', (e) => {
+    let target = e.target;
+    if (target === modalContainer) {
+      hideModal();
+    }
 
   return {
     add: add,
